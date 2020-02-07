@@ -1,16 +1,173 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-	<head>
-		<meta charset="utf-8" />
-		<title>Cinema App</title>
-	</head>
-	<body>
-		<h1>Documentation</h1>
-		<p>
-			The web application will provide users with access to information about
-			different movies, directors, and genres. Users will be able to sign up,
-			update their personal information, and create a list of their favorite
-			movies
-		</p>
-	</body>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<title>Cinema App</title>
+</head>
+
+<body>
+	<h1>Documentation</h1>
+	<p id="description">
+		The web application will provide users with access to information about
+		different movies, directors, and genres. Users will be able to sign up,
+		update their personal information, and create a list of their favorite
+		movies
+	</p>
+	<table>
+		<tr class="headers">
+			<th>Business Logic</th>
+			<th>URL</th>
+			<th>HTTP Method</th>
+			<th>Request body data format</th>
+			<th>Response body data format</th>
+		</tr>
+		<tr>
+			<td>Get list of all Movies </td>
+			<td>/movies</td>
+			<td>GET</td>
+			<td>None</td>
+			<td>A JSON object holding list with data about all the Movies</td>
+		</tr>
+		<tr>
+
+			<td>Get data about Movie by title</th>
+			<td>/movies/[Title]</td>
+			<td>GET</th>
+			<td>None</td>
+			<td>A JSON object holding data about a single movie,containing a title,
+				director,year,description,<br>genre,leadingMan, leadingFemale, Example:
+				<p>
+					{<br>
+					title: "Our Souls at Night ",<br>
+					director: "Ritesh Batra",<br>
+					year: "2017",<br>
+					description: "Fonda and Redford star as Addie Moore and Louis Waters,<br>
+					a widow and widower who've lived next to each other for years. <br>
+					The pair have almost no relationship, but that all changes when Addie<br>
+					tries to make a connection with her neighbor.",<br>
+					genre: ["Drama", "Romance"],<br>
+					leadingMan: "Robert Redford",<br>
+					leadingFemale: "Jane Fonda"<br>
+					},<br>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Get data about Genre by name</td>
+			<td>/genres/[Name]</td>
+			<td>GET</td>
+			<td>None</td>
+			<td>A JSON object holding data about a movie genre
+				<p>
+					{<br>
+					"name": "Crime",<br>
+					"description": "Crime films, in the broadest sense, are a cinematic genre inspired by and
+					analogous<br>
+					to the crime fiction literary genre. Films of this genre generally involve various aspects of crime
+					and its detection."<br>
+					}<br>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td>Get data about Director by name</td>
+			<td>/directors/[Name]</td>
+			<td>GET</td>
+			<td>None</td>
+			<td>A JSON object holding data about a director
+				<p>
+					{<br>
+					"name": "Robert Redford",<br>
+					"bio": "",<br>
+					"birthyear": "",<br>
+					"deathyear": ""<br>
+					}<br>
+
+
+				</p>
+			</td>
+
+		</tr>
+		<tr>
+			<td>Add a new User</td>
+			<td>/users</td>
+			<td>POST</td>
+			<td>None</td>
+			<td>A JSON object holding data about the user to add, structured like:
+				<p>
+					{<br>
+					"name": "Daniel2",<br>
+					"username": "ama",<br>
+					"password": "ama12",<br>
+					"email": "daniela@yahoo.com",<br>
+					"birthday": "",<br>
+					"favourites": "27",<br>
+					"id": "0ed561be-30a2-45cd-a9e6-319252abf7b5"<br>
+					}<br>
+				</p>
+			</td>
+
+		</tr>
+
+		<tr>
+			<td>Delete User from list of users by ID</td>
+			<td>/users/[ID]</td>
+			<td>DELETE</td>
+			<td>None</td>
+			<td>A message indicating thar user was removed from the user's list</td>
+		</tr>
+		<tr>
+			<td>Get list of all Users</td>
+			<td>/users</td>
+			<td>GET</td>
+			<td>None</td>
+			<td>A JSON object holding list with data about all the Users</td>
+		</tr>
+
+		<tr>
+			<td>Get a User from users list by ID</td>
+			<td>/users/[ID]</td>
+			<td>GET</td>
+			<td>None</td>
+			<td>A JSON object holding users details of a user
+
+				<p>
+					{<br>
+					"id": "0",<br>
+					"name": "Michael Blunt",<br>
+					"username": "Michael",<br>
+					"password": "Mi123",<br>
+					"email": "",<br>
+					"birthday": "",<br>
+					"favourites": ""<br>
+					}<br>
+				</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td>Update a User details by ID</td>
+			<td>/users/[ID]</td>
+			<td>PUT</td>
+			<td>None</td>
+			<td>A JSON object holding data about the user to add, structured like:
+
+				<p>
+					{<br>
+					"id": "0",<br>
+					"name": "Michael Blunt",<br>
+					"username": "Michael",<br>
+					"password": "Mi123",<br>
+					"email": "",<br>
+					"birthday": "",<br>
+					"favourites": ""<br>
+					}<br>
+				</p>
+			</td>
+		</tr>
+	</table>
+</body>
+
 </html>
