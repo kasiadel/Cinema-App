@@ -94,8 +94,19 @@
 			<td>Add a new User</td>
 			<td>/users</td>
 			<td>POST</td>
-			<td>None</td>
 			<td>A JSON object holding data about the user to add, structured like:
+				<p>
+					{<br>
+					"name": "Daniel2",<br>
+					"username": "ama",<br>
+					"password": "ama12",<br>
+					"email": "daniela@yahoo.com",<br>
+					"birthday": "",<br>
+					"favourites": "27",<br>
+					}<br>
+				</p>
+			</td>
+			<td>A JSON object holding data about the user that was added, including an ID, structured like:
 				<p>
 					{<br>
 					"name": "Daniel2",<br>
