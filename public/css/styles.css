@@ -1,0 +1,25 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    border:2px solid black;
+  }
+  
+  td, th {
+    border: 1px solid black;;
+    text-align: left;
+    padding: 8px;
+  }
+.headers{
+color:blue;
+text-transform:uppercase;
+
+}  
+p{
+    color:purple;
+}
+#description{
+font-size: 1.5rem;
+color:grey;
+
+}
