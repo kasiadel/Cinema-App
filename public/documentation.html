@@ -129,6 +129,14 @@
 			<td>None</td>
 			<td>A message indicating thar user was removed from the user's list</td>
 		</tr>
+
+		<tr>
+			<td>Delete User from list of users by username</td>
+			<td>/users/[Username]</td>
+			<td>DELETE</td>
+			<td>None</td>
+			<td>A message indicating thar user was removed from the user's list</td>
+		</tr>
 		<tr>
 			<td>Get list of all Users</td>
 			<td>/users</td>
@@ -157,7 +165,17 @@
 				</p>
 			</td>
 		</tr>
-
+		<tr>
+			<td>Add a movie to the list of favorites</td>
+			<td>/users/[Username]/Movies/[MovieID]</td>
+			<td>POST</td>
+			<td>
+				JSON object holding data about a movie which users like to add to their list of favorites.
+			</td>
+			<td>
+				JSON object holding data about the movie that was added to the list of favorite.
+			</td>
+		</tr>
 		<tr>
 			<td>Update a User details by ID</td>
 			<td>/users/[ID]</td>
