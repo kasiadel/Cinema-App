@@ -39,18 +39,27 @@
 			<td>A JSON object holding data about a single movie,containing a title,
 				director,year,description,<br>genre,leadingMan, leadingFemale, Example:
 				<p>
-					{<br>
-					title: "Our Souls at Night ",<br>
-					director: "Ritesh Batra",<br>
-					year: "2017",<br>
-					description: "Fonda and Redford star as Addie Moore and Louis Waters,<br>
-					a widow and widower who've lived next to each other for years. <br>
-					The pair have almost no relationship, but that all changes when Addie<br>
-					tries to make a connection with her neighbor.",<br>
-					genre: ["Drama", "Romance"],<br>
-					leadingMan: "Robert Redford",<br>
-					leadingFemale: "Jane Fonda"<br>
-					},<br>
+					{
+					"Genre": {
+					"Name": "Comedy",
+					"Description": "Comedy is a genre of film in which the main emphasis is on humor. These films are
+					designed to make the audience laugh"
+					},
+					"Director": {
+					"Name": "George Roy Hill",
+					"Bio": "George Roy Hill was an American film director. He is most noted for directing such films as
+					Butch Cassidy and the Sundance Kid (1969) and The Sting (1973), both starring Paul Newman and Robert
+					Redford."
+					},
+					"Actors": [],
+					"_id": "5e43ee9d23cb77676022a2be",
+					"Title": "The Sting",
+					"Description": "Two grifters team up to pull off the ultimate con.",
+					"ImagePath": "https://bit.ly/2SyR069",
+					"Featured": true,
+					"Bio": "was an American film director. He is most noted for directing such films as Butch Cassidy
+					and the Sundance Kid (1969) and The Sting (1973), both starring Paul Newman and Robert Redford."
+					}
 				</p>
 			</td>
 		</tr>
@@ -61,13 +70,11 @@
 			<td>None</td>
 			<td>A JSON object holding data about a movie genre
 				<p>
-					{<br>
-					"name": "Crime",<br>
-					"description": "Crime films, in the broadest sense, are a cinematic genre inspired by and
-					analogous<br>
-					to the crime fiction literary genre. Films of this genre generally involve various aspects of crime
-					and its detection."<br>
-					}<br>
+
+					Biography : A biographical film, or biopic (/ˈbaɪoʊpɪk/; abbreviation for biographical motion
+					picture), is a film that
+					dramatizes the life of a non-fictional or historically-based person or people.
+
 				</p>
 			</td>
 		</tr>
@@ -78,12 +85,13 @@
 			<td>None</td>
 			<td>A JSON object holding data about a director
 				<p>
-					{<br>
-					"name": "Robert Redford",<br>
-					"bio": "",<br>
-					"birthyear": "",<br>
-					"deathyear": ""<br>
-					}<br>
+					{
+					"Name": "Sydney Pollack",
+					"Bio": "Sydney Pollack was an Academy Award-winning director, producer, actor, writer and public
+					figure, who directed and produced over 40 films.",
+					"Birth": "1934-01-01T00:00:00.000Z",
+					"Death": "2008-01-01T00:00:00.000Z"
+					}
 
 
 				</p>
@@ -96,38 +104,14 @@
 			<td>POST</td>
 			<td>A JSON object holding data about the user to add, structured like:
 				<p>
-					{<br>
-					"name": "Daniel2",<br>
-					"username": "ama",<br>
-					"password": "ama12",<br>
-					"email": "daniela@yahoo.com",<br>
-					"birthday": "",<br>
-					"favourites": "27",<br>
-					}<br>
+					{
+					"Username": "Michael1",
+					"Password": "tmel123",
+					"Email":"Michael1@yahoo.com"
+
+					}
 				</p>
 			</td>
-			<td>A JSON object holding data about the user that was added, including an ID, structured like:
-				<p>
-					{<br>
-					"name": "Daniel2",<br>
-					"username": "ama",<br>
-					"password": "ama12",<br>
-					"email": "daniela@yahoo.com",<br>
-					"birthday": "",<br>
-					"favourites": "27",<br>
-					"id": "0ed561be-30a2-45cd-a9e6-319252abf7b5"<br>
-					}<br>
-				</p>
-			</td>
-
-		</tr>
-
-		<tr>
-			<td>Delete User from list of users by ID</td>
-			<td>/users/[ID]</td>
-			<td>DELETE</td>
-			<td>None</td>
-			<td>A message indicating thar user was removed from the user's list</td>
 		</tr>
 
 		<tr>
@@ -136,6 +120,7 @@
 			<td>DELETE</td>
 			<td>None</td>
 			<td>A message indicating thar user was removed from the user's list</td>
+			<p>Ola122 was deleted.</p>
 		</tr>
 		<tr>
 			<td>Get list of all Users</td>
@@ -146,22 +131,21 @@
 		</tr>
 
 		<tr>
-			<td>Get a User from users list by ID</td>
-			<td>/users/[ID]</td>
+			<td>Get a User from users list by name</td>
+			<td>/users/[name]</td>
 			<td>GET</td>
 			<td>None</td>
 			<td>A JSON object holding users details of a user
 
 				<p>
-					{<br>
-					"id": "0",<br>
-					"name": "Michael Blunt",<br>
-					"username": "Michael",<br>
-					"password": "Mi123",<br>
-					"email": "",<br>
-					"birthday": "",<br>
-					"favourites": ""<br>
-					}<br>
+					{
+					"FavoriteMovies": [],
+					"_id": "5e4be7a3e69ba534369ffcc2",
+					"username": "kasienia",
+					"password": "testowy1",
+					"email": "kasienia@gmail.com",
+					"birthday": "1979-04-22T00:00:00.000Z"
+					},
 				</p>
 			</td>
 		</tr>
@@ -172,27 +156,25 @@
 			<td>
 				JSON object holding data about a movie which users like to add to their list of favorites.
 			</td>
-			<td>
-				JSON object holding data about the movie that was added to the list of favorite.
-			</td>
 		</tr>
 		<tr>
-			<td>Update a User details by ID</td>
-			<td>/users/[ID]</td>
+			<td>Update a User details by Username</td>
+			<td>/users/[Username]</td>
 			<td>PUT</td>
 			<td>None</td>
 			<td>A JSON object holding data about the user to add, structured like:
 
 				<p>
-					{<br>
-					"id": "0",<br>
-					"name": "Michael Blunt",<br>
-					"username": "Michael",<br>
-					"password": "Mi123",<br>
-					"email": "",<br>
-					"birthday": "",<br>
-					"favourites": ""<br>
-					}<br>
+					{
+					"FavoriteMovies": [
+					"5e4443a5fc9fb0aaba54491f"
+					],
+					"_id": "5e4d196b80873a05ed25fab6",
+					"Username": "Ola1212112",
+					"Password": "Test",
+					"Email": "Ola@yahoo.com",
+					"__v": 0
+					}
 				</p>
 			</td>
 		</tr>
