@@ -1,17 +1,16 @@
 var express = require("express");
-var bodyParser = require("body-parser");
+const app = express();
 const mongoose = require("mongoose");
+var bodyParser = require("body-parser");
+const cors = require("cors");
 const Models = require("./models.js");
 const passport = require("passport");
 require("./passport");
-const cors = require("cors");
-app.use(cors());
-
 const Movies = Models.Movie;
 const Users = Models.User;
-const app = express();
 uuid = require("uuid");
 app.use(bodyParser.json());
+
 const { check, validationResult } = require("express-validator");
 // mongoose.connect("mongodb://localhost:27017/Cinema-App", {
 // 	useNewUrlParser: true,
@@ -27,6 +26,8 @@ mongoose.connect(
 );
 
 var auth = require("./auth")(app);
+
+// app.use(cors());
 
 var allowedOrigins = ["http://localhost:8080"];
 
