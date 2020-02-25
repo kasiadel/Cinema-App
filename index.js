@@ -27,8 +27,6 @@ mongoose.connect(
 
 var auth = require("./auth")(app);
 
-// app.use(cors());
-
 var allowedOrigins = ["http://localhost:8080"];
 
 app.use(
