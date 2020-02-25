@@ -21,8 +21,8 @@ const { check, validationResult } = require("express-validator");
 mongoose.connect(
 	"mongodb+srv://myCinemaAppadmin:irysek@cluster0-kpfkc.mongodb.net/Cinema-App?retryWrites=true&w=majority",
 	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useNewUrlParser: true
+		// useUnifiedTopology: true
 	}
 );
 
