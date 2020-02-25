@@ -13,10 +13,18 @@ const app = express();
 uuid = require("uuid");
 app.use(bodyParser.json());
 const { check, validationResult } = require("express-validator");
-mongoose.connect("mongodb://localhost:27017/Cinema-App", {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
+// mongoose.connect("mongodb://localhost:27017/Cinema-App", {
+// 	useNewUrlParser: true,
+// 	useUnifiedTopology: true
+// });
+
+mongoose.connect(
+	"mongodb+srv://myCinemaAppadmin:irysek@cluster0-kpfkc.mongodb.net/Cinema-App?retryWrites=true&w=majority",
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	}
+);
 
 var auth = require("./auth")(app);
 

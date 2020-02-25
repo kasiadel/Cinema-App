@@ -1,0 +1,14 @@
+{"_id":{"$oid":"5e4be7a3e69ba534369ffcc2"},"username":"kasienia","password":"testowy1","email":"kasienia@gmail.com","birthday":{"$date":"1979-04-22T00:00:00.000Z"}}
+{"_id":{"$oid":"5e4be854e69ba534369ffcc3"},"username":"tobyorson47","password":"tob1221424","email":"tobyorson21","birthday":{"$date":"1999-12-23T00:00:00.000Z"}}
+{"_id":{"$oid":"5e4be8f0e69ba534369ffcc4"},"username":"melinda1232","password":"tmel123","email":"melinda12@yahoo.com","birthday":{"$date":"2003-09-23T00:00:00.000Z"}}
+{"_id":{"$oid":"5e4be981e69ba534369ffcc5"},"username":"cassandra17","password":"cassie2352465","email":"cassandra17@vp.pl","birthday":{"$date":"1988-12-12T00:00:00.000Z"}}
+{"_id":{"$oid":"5e4d06760b0a7903e7dfca69"},"FavoriteMovies":[],"Username":"tsdf","Password":"jhdjh","Email":"jkdfh@yahoo.com","__v":0}
+{"_id":{"$oid":"5e4d195880873a05ed25fab5"},"FavoriteMovies":[],"Username":"Ola1","Password":"Test","Email":"Ola@yahoo.com","__v":0}
+{"_id":{"$oid":"5e4d196b80873a05ed25fab6"},"FavoriteMovies":[{"$oid":"5e4443a5fc9fb0aaba54491f"}],"Username":"Ola1212112","Password":"Test","Email":"Ola@yahoo.com","__v":0,"Birthday":null}
+{"_id":{"$oid":"5e4d39337ced7906fef794a7"},"FavoriteMovies":[],"Username":null,"Password":null,"Email":null,"__v":0,"Birthday":null}
+{"_id":{"$oid":"5e4e90f6813017005fa58071"},"FavoriteMovies":[],"Username":"Michael1","Password":"tmel123","Email":"Michael1@yahoo.com","__v":0}
+{"_id":{"$oid":"5e4ea0ce94986b2b9d842801"},"Username":"Ola1212112","Password":"Test","Email":"Ola@yahoo.com","Birthday":null}
+{"_id":{"$oid":"5e4ea5376bf26ec49e49de7e"},"Username":"aneta","Password":"test12","Email":"aneta@yahoo.com","Birthday":{"$date":"2004-03-18T00:00:00.000Z"}}
+{"_id":{"$oid":"5e53a68df20a0d00d85ef6b0"},"FavoriteMovies":[],"Username":"Katie2","Password":"spaghetti2","Email":"katie@yahoo.com","Birthday":{"$date":"1980-12-12T00:00:00.000Z"},"__v":0}
+{"_id":{"$oid":"5e53a7aaf20a0d00d85ef6b1"},"FavoriteMovies":[{"$oid":"5e445b471c8b7f08250719ce"}],"Username":"Katie3","Password":"spaghetti33","Email":"katie@yahoo.com","Birthday":{"$date":"1980-12-12T00:00:00.000Z"},"__v":0}
+{"_id":{"$oid":"5e53b349edc62c016f60f9df"},"FavoriteMovies":[],"Username":"Helene","Password":"h3lkjfksdfjlk","Email":"helenee@yahoo.com","Birthday":{"$date":"1999-12-24T00:00:00.000Z"},"__v":0}
