@@ -4,19 +4,39 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 const passport = require("passport");
 require("./passport");
+const cors = require("cors");
+app.use(cors());
 
 const Movies = Models.Movie;
 const Users = Models.User;
 const app = express();
 uuid = require("uuid");
 app.use(bodyParser.json());
-
+const { check, validationResult } = require("express-validator");
 mongoose.connect("mongodb://localhost:27017/Cinema-App", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
 });
 
 var auth = require("./auth")(app);
+
+var allowedOrigins = ["http://localhost:8080"];
+
+app.use(
+	cors({
+		origin: function(origin, callback) {
+			if (!origin) return callback(null, true);
+			if (allowedOrigins.indexOf(origin) === -1) {
+				// If a specific origin isn’t found on the list of allowed origins
+				var message =
+					"The CORS policy for this application doesn’t allow access from origin " +
+					origin;
+				return callback(new Error(message), false);
+			}
+			return callback(null, true);
+		}
+	})
+);
 
 // Get all users
 app.get("/users", passport.authenticate("jwt", { session: false }), function(
@@ -34,32 +54,57 @@ app.get("/users", passport.authenticate("jwt", { session: false }), function(
 });
 
 //Create new User
-app.post("/users", function(req, res) {
-	Users.findOne({ Username: req.body.Username })
-		.then(function(user) {
-			if (user) {
-				return res.status(400).send(req.body.Username + "already exists");
-			} else {
-				Users.create({
-					Username: req.body.Username,
-					Password: req.body.Password,
-					Email: req.body.Email,
-					Birthday: req.body.Birthday
-				})
-					.then(function(user) {
-						res.status(201).json(user);
+app.post(
+	"/users", // Validation logic here for request
+	//you can either use a chain of methods like .not().isEmpty()
+	//which means "opposite of isEmpty" in plain english "is not empty"
+	//or use .isLength({min: 5}) which means
+	//minimum value of 5 characters are only allowed
+	[
+		check("Username", "Username is required").isLength({ min: 5 }),
+		check(
+			"Username",
+			"Username contains non alphanumeric characters - not allowed."
+		).isAlphanumeric(),
+		check("Password", "Password is required")
+			.not()
+			.isEmpty(),
+		check("Email", "Email does not appear to be valid").isEmail()
+	],
+	(req, res) => {
+		// check the validation object for errors
+		var errors = validationResult(req);
+
+		if (!errors.isEmpty()) {
+			return res.status(422).json({ errors: errors.array() });
+		}
+		var hashedPassword = Users.hashPassword(req.body.Password);
+		Users.findOne({ Username: req.body.Username })
+			.then(function(user) {
+				if (user) {
+					return res.status(400).send(req.body.Username + "already exists");
+				} else {
+					Users.create({
+						Username: req.body.Username,
+						Password: req.body.Password,
+						Email: req.body.Email,
+						Birthday: req.body.Birthday
 					})
-					.catch(function(error) {
-						console.error(error);
-						res.status(500).send("Error: " + error);
-					});
-			}
-		})
-		.catch(function(error) {
-			console.error(error);
-			res.status(500).send("Error: " + error);
-		});
-});
+						.then(function(user) {
+							res.status(201).json(user);
+						})
+						.catch(function(error) {
+							console.error(error);
+							res.status(500).send("Error: " + error);
+						});
+				}
+			})
+			.catch(function(error) {
+				console.error(error);
+				res.status(500).send("Error: " + error);
+			});
+	}
+);
 
 // Get a user by username
 app.get(
@@ -151,67 +196,69 @@ app.get("/movies", passport.authenticate("jwt", { session: false }), function(
 });
 
 // // Get a movie by title
-// app.get(
-// 	"/movies/:Title",
-// 	passport.authenticate("jwt", { session: false }, function(req, res) {
-// 		Movies.findOne({ Title: req.params.Title })
-// 			.then(function(movie) {
-// 				res.json(movie);
-// 			})
-// 			.catch(function(err) {
-// 				console.error(err);
-// 				res.status(500).send("Error: " + err);
-// 			});
-// 	})
-// );
-
-// Get a movie by title
 app.get(
 	"/movies/:Title",
 	passport.authenticate("jwt", { session: false }),
-	(req, res) => {
+	function(req, res) {
 		Movies.findOne({ Title: req.params.Title })
-			.then(movie => {
+			.then(function(movie) {
 				res.json(movie);
 			})
-			.catch(error => {
-				console.error(error);
-				res.status(500).send("Error: " + error);
+			.catch(function(err) {
+				console.error(err);
+				res.status(500).send("Error: " + err);
 			});
 	}
 );
-// //Get a director by name
-// app.get(
-// 	"/movies/directors/:Name",
-// 	passport.authenticate("jwt", { session: false }, function(req, res) {
-// 		Movies.findOne({ "Director.Name": req.params.Name })
-// 			.then(function(movies) {
-// 				res.status(201).json(movies.Director); /*Returns Director By Name*/
-// 			})
-// 			.catch(function(error) {
-// 				console.error(error);
-// 				res.status(500).send("Error" + err);
-// 			});
-// 	})
-// );
 
+// Get a movie by title
+// app.get(
+// 	"/movies/:Title",
+// 	passport.authenticate("jwt", { session: false }),
+// 	(req, res) => {
+// 		Movies.findOne({ Title: req.params.Title })
+// 			.then(movie => {
+// 				res.json(movie);
+// 			})
+// 			.catch(error => {
+// 				console.error(error);
+// 				res.status(500).send("Error: " + error);
+// 			});
+// 	}
+// );
 // //Get a director by name
 app.get(
 	"/movies/directors/:Name",
 	passport.authenticate("jwt", { session: false }),
-	(req, res) => {
-		Movies.findOne({
-			"Director.Name": req.params.Name
-		})
-			.then(movies => {
-				res.json(movies.Director);
+	function(req, res) {
+		Movies.findOne({ "Director.Name": req.params.Name })
+			.then(function(movies) {
+				res.status(201).json(movies.Director); /*Returns Director By Name*/
 			})
-			.catch(error => {
+			.catch(function(error) {
 				console.error(error);
-				res.status(500).send("Error: " + error);
+				res.status(500).send("Error" + err);
 			});
 	}
 );
+
+// //Get a director by name
+// app.get(
+// 	"/movies/directors/:Name",
+// 	passport.authenticate("jwt", { session: false }),
+// 	(req, res) => {
+// 		Movies.findOne({
+// 			"Director.Name": req.params.Name
+// 		})
+// 			.then(movies => {
+// 				res.json(movies.Director);
+// 			})
+// 			.catch(error => {
+// 				console.error(error);
+// 				res.status(500).send("Error: " + error);
+// 			});
+// 	}
+// );
 
 // Get a data about genre by movie title
 app.get(
@@ -309,4 +356,7 @@ app.use(function(err, req, res, next) {
 });
 
 // listen for requests
-app.listen(8080, () => console.log("Your app is listening on port 8080."));
+var port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+	console.log("Listening on Port 3000");
+});
