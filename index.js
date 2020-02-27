@@ -218,22 +218,6 @@ app.get(
 	}
 );
 
-// Get a movie by title
-// app.get(
-// 	"/movies/:Title",
-// 	passport.authenticate("jwt", { session: false }),
-// 	(req, res) => {
-// 		Movies.findOne({ Title: req.params.Title })
-// 			.then(movie => {
-// 				res.json(movie);
-// 			})
-// 			.catch(error => {
-// 				console.error(error);
-// 				res.status(500).send("Error: " + error);
-// 			});
-// 	}
-// );
-// //Get a director by name
 app.get(
 	"/movies/directors/:Name",
 	passport.authenticate("jwt", { session: false }),
@@ -249,23 +233,6 @@ app.get(
 	}
 );
 
-// //Get a director by name
-// app.get(
-// 	"/movies/directors/:Name",
-// 	passport.authenticate("jwt", { session: false }),
-// 	(req, res) => {
-// 		Movies.findOne({
-// 			"Director.Name": req.params.Name
-// 		})
-// 			.then(movies => {
-// 				res.json(movies.Director);
-// 			})
-// 			.catch(error => {
-// 				console.error(error);
-// 				res.status(500).send("Error: " + error);
-// 			});
-// 	}
-// );
 
 // Get a data about genre by movie title
 app.get(
