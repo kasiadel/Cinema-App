@@ -188,7 +188,7 @@ app.delete(
 );
 
 // Get all movies
-app.get("/movies", passport.authenticate("jwt", { session: false }), function(
+app.get("/movies", function(
 	req,
 	res
 ) {
@@ -205,7 +205,6 @@ app.get("/movies", passport.authenticate("jwt", { session: false }), function(
 // // Get a movie by title
 app.get(
 	"/movies/:Title",
-	passport.authenticate("jwt", { session: false }),
 	function(req, res) {
 		Movies.findOne({ Title: req.params.Title })
 			.then(function(movie) {
@@ -220,7 +219,6 @@ app.get(
 
 app.get(
 	"/movies/directors/:Name",
-	passport.authenticate("jwt", { session: false }),
 	function(req, res) {
 		Movies.findOne({ "Director.Name": req.params.Name })
 			.then(function(movies) {
@@ -237,7 +235,6 @@ app.get(
 // Get a data about genre by movie title
 app.get(
 	"/movies/genres/:Title",
-	passport.authenticate("jwt", { session: false }),
 	function(req, res) {
 		Movies.findOne({ Title: req.params.Title })
 			.then(function(movie) {
