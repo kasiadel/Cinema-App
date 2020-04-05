@@ -1,15 +1,22 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+
+
+
 export class MovieView extends React.Component {
+
 
   constructor() {
     super();
 
     this.state = {};
-  }
+}
+
 
   render() {
-    const { movie } = this.props;
+    const { movie, } = this.props;
 
     if (!movie) return null;
 
@@ -32,10 +39,14 @@ export class MovieView extends React.Component {
         <div className="movie-director">
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
-        </div>
+        </div>   
+        {/* <Link to={"/"}>
+                    <Button variant="primary" className="back-button">
+                    Back</Button>
+                  </Link> */}
+     
+     <Button>Back</Button>
        </div>
-
-
     );
   }
 }
