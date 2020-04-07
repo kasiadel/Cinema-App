@@ -32,7 +32,11 @@ export class MainView extends React.Component {
       });
   }
 
-
+  resetSelectedMovie(){
+    this.setState({
+      selectedMovie:null
+    });
+  }
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
