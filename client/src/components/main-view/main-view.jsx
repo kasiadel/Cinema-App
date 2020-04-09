@@ -1,30 +1,29 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 
-
-
-import { MovieCard } from '../movie-card/movie-card';
-import { MovieView } from '../movie-view/movie-view';
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export class MainView extends React.Component {
- constructor() {
-      super();
-  
-      this.state = {
-        movies: null,
-        selectedMovie: null
-      };
-    } 
+  constructor() {
+    super();
+
+    this.state = {
+      movies: null,
+      selectedMovie: null,
+    };
+  }
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('https://tranquil-river-08432.herokuapp.com/movies/')
-      .then(response => {
+    axios
+      .get("https://tranquil-river-08432.herokuapp.com/movies/")
+      .then((response) => {
         // Assign the result to the state
         this.setState({
-          movies: response.data
+          movies: response.data,
         });
       })
       .catch(function (error) {
@@ -32,14 +31,14 @@ export class MainView extends React.Component {
       });
   }
 
-  resetSelectedMovie(){
+  resetSelectedMovie() {
     this.setState({
-      selectedMovie:null
+      selectedMovie: null,
     });
   }
   onMovieClick(movie) {
     this.setState({
-      selectedMovie: movie
+      selectedMovie: movie,
     });
   }
 
@@ -48,17 +47,25 @@ export class MainView extends React.Component {
     // before the data is initially loaded
     const { movies, selectedMovie } = this.state;
     // Before the movies have been loaded
-    if (!movies) return <div className="main-view"/>;
+    if (!movies) return <div className="main-view" />;
 
     return (
       <div className="main-view">
-       {selectedMovie
-          ? <MovieView movie={selectedMovie}/>
-          : movies.map(movie => (
-            <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
+        {selectedMovie ? (
+          <MovieView
+            movie={selectedMovie}
+            onClick={() => this.resetSelectedMovie()}
+          />
+        ) : (
+          movies.map((movie) => (
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onClick={(movie) => this.onMovieClick(movie)}
+            />
           ))
-       }
+        )}
       </div>
-     );
-   }
- }
+    );
+  }
+}
