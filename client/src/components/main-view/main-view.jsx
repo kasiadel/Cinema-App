@@ -1,10 +1,18 @@
 import React from "react";
 import axios from "axios";
+import PropTypes from "prop-types";
 
-import { MovieCard } from "../movie-card/movie-card";
+import { LoginView } from "../login-view/login-view";
 import { MovieView } from "../movie-view/movie-view";
-import { Link } from "react-router-dom";
+import { RegistrationView } from "../registration-view/registration-view";
+import { MovieCard } from "../movie-card/movie-card";
+
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
 
 export class MainView extends React.Component {
   constructor() {
@@ -13,6 +21,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: null,
       selectedMovie: null,
+      user: null,
     };
   }
 
@@ -41,31 +50,48 @@ export class MainView extends React.Component {
       selectedMovie: movie,
     });
   }
-
+  onLoggedIn(user) {
+    this.setState({
+      user,
+    });
+  }
   render() {
-    // If the state isn't initialized, this will throw on runtime
-    // before the data is initially loaded
-    const { movies, selectedMovie } = this.state;
-    // Before the movies have been loaded
-    if (!movies) return <div className="main-view" />;
+    //   // If the state isn't initialized, this will throw on runtime
+    //   // before the data is initially loaded
+    const { movies, selectedMovie, user, register } = this.state;
+
+    if (!user)
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+
+    // if (register);
+    // return (
+    //   <RegistrationView
+    //     onClick={() => this.alreadyMember()}
+    //     onSignedIn={(user) => this.onSignedIn(user)}
+    //   />
+    // );
 
     return (
-      <div className="main-view">
+      <React.Fragment>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand>Cinema-App</Navbar.Brand>
+          <Nav.Link href="login-view">Login</Nav.Link>
+          <Nav.Link href="registration-view">Register</Nav.Link>
+        </Navbar>
         {selectedMovie ? (
-          <MovieView
-            movie={selectedMovie}
-            onClick={() => this.resetSelectedMovie()}
-          />
+          <MovieView movie={selectedMovie} />
         ) : (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie._id}
-              movie={movie}
-              onClick={(movie) => this.onMovieClick(movie)}
-            />
-          ))
+          <div className="main-view card-deck">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onClick={(movie) => this.onMovieClick(movie)}
+              />
+            ))}
+          </div>
         )}
-      </div>
+      </React.Fragment>
     );
   }
 }
