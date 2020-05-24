@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+import { Link } from "react-router-dom";
+
 export class MovieCard extends React.Component {
   render() {
     const { movie, onClick } = this.props;

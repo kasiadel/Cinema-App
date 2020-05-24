@@ -1,11 +1,11 @@
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 
 import { LoginView } from "../login-view/login-view";
-import { MovieView } from "../movie-view/movie-view";
 import { RegistrationView } from "../registration-view/registration-view";
+import { MovieView } from "../movie-view/movie-view";
 import { MovieCard } from "../movie-card/movie-card";
+import { Link } from "react-router-dom";
 
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -50,6 +50,7 @@ export class MainView extends React.Component {
       selectedMovie: movie,
     });
   }
+
   onLoggedIn(user) {
     this.setState({
       user,
