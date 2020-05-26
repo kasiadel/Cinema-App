@@ -22,6 +22,7 @@ export class MainView extends React.Component {
       movies: null,
       selectedMovie: null,
       user: null,
+      newUser: false,
     };
   }
 
@@ -36,7 +37,7 @@ export class MainView extends React.Component {
         });
       })
       .catch(function (error) {
-        console.log(error);
+        // console.log(error);
       });
   }
 
@@ -59,18 +60,18 @@ export class MainView extends React.Component {
   render() {
     //   // If the state isn't initialized, this will throw on runtime
     //   // before the data is initially loaded
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, selectedMovie, user, newUser } = this.state;
 
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
-    // if (register);
-    // return (
-    //   <RegistrationView
-    //     onClick={() => this.alreadyMember()}
-    //     onSignedIn={(user) => this.onSignedIn(user)}
-    //   />
-    // );
+    if (newUser);
+    return (
+      <RegistrationView
+        onClick={() => this.alreadyMember()}
+        onSignedIn={(user) => this.onSignedIn(user)}
+      />
+    );
 
     return (
       <React.Fragment>

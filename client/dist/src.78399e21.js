@@ -45820,7 +45820,7 @@ function RegistrationView(props) {
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
 
-    _axios.default.post("https://myflixdb-api.herokuapp.com/login", {
+    _axios.default.post("  https://tranquil-river-08432.herokuapp.com/users", {
       Username: username,
       Password: password,
       Email: email,
@@ -45831,6 +45831,7 @@ function RegistrationView(props) {
       window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
       console.log("error registering the user");
+      props.onLoggedIn(username);
     });
   };
 
@@ -49049,8 +49050,9 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
       return _react.default.createElement(_Card.default, {
+        className: "mb-4 mb-sm-4",
         style: {
-          width: "18rem"
+          width: "16rem"
         }
       }, _react.default.createElement(_Card.default.Img, {
         variant: "top",
@@ -49060,7 +49062,24 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
           return _onClick(movie);
         },
         variant: "link"
-      }, "Open")));
+      }, "Open"))) // <Card className="mb-3 mb-sm-4" style={{ minWidth: "12rem" }}>
+      //   <Card.Img variant="top" src={movie.ImageUrl} />
+      //   <Card.Body>
+      //     <Card.Title>{movie.Title}</Card.Title>
+      //     <Card.Subtitle className="mb-2 text-muted">
+      //       {movie.Genre.Name}
+      //     </Card.Subtitle>
+      //     <Card.Text>{movieDescription}</Card.Text>
+      //     <Button
+      //       className="outline-primary"
+      //       onClick={() => onClick(movie)}
+      //       variant="link"
+      //     >
+      //       Open
+      //     </Button>
+      //   </Card.Body>
+      // </Card>
+      ;
     }
   }]);
 
@@ -49153,7 +49172,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       movies: null,
       selectedMovie: null,
-      user: null
+      user: null,
+      newUser: false
     };
     return _this;
   } // One of the "hooks" available in a React Component
@@ -49169,8 +49189,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         _this2.setState({
           movies: response.data
         });
-      }).catch(function (error) {
-        console.log(error);
+      }).catch(function (error) {// console.log(error);
       });
     }
   }, {
@@ -49205,19 +49224,21 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          register = _this$state.register;
+          newUser = _this$state.newUser;
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }
-      }); // if (register);
-      // return (
-      //   <RegistrationView
-      //     onClick={() => this.alreadyMember()}
-      //     onSignedIn={(user) => this.onSignedIn(user)}
-      //   />
-      // );
-
+      });
+      if (newUser) ;
+      return _react.default.createElement(_registrationView.RegistrationView, {
+        onClick: function onClick() {
+          return _this3.alreadyMember();
+        },
+        onSignedIn: function onSignedIn(user) {
+          return _this3.onSignedIn(user);
+        }
+      });
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Navbar.default, {
         bg: "light",
         expand: "lg"
@@ -49308,7 +49329,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 }(_react.default.Component); // Find the root of our app
 
 
-var container = document.getElementsByClassName('app-container')[0]; // Tell React to render our app in the root DOM element
+var container = document.getElementsByClassName("app-container")[0]; // Tell React to render our app in the root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./index.scss":"index.scss"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -49339,7 +49360,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56928" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53922" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

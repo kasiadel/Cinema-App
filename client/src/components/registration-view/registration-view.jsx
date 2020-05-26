@@ -14,7 +14,7 @@ export function RegistrationView(props) {
   const handleRegister = (e) => {
     e.preventDefault();
     axios
-      .post("https://myflixdb-api.herokuapp.com/login", {
+      .post("  https://tranquil-river-08432.herokuapp.com/users", {
         Username: username,
         Password: password,
         Email: email,
@@ -27,6 +27,7 @@ export function RegistrationView(props) {
       })
       .catch((e) => {
         console.log("error registering the user");
+        props.onLoggedIn(username);
       });
   };
 
