@@ -22,7 +22,7 @@ export class MainView extends React.Component {
       movies: null,
       selectedMovie: null,
       user: null,
-      newUser: false,
+      register: null,
     };
   }
 
@@ -54,18 +54,20 @@ export class MainView extends React.Component {
 
   onLoggedIn(user) {
     this.setState({
+      //console.log(user);
       user,
     });
   }
   render() {
     //   // If the state isn't initialized, this will throw on runtime
     //   // before the data is initially loaded
-    const { movies, selectedMovie, user, newUser } = this.state;
+    const { movies, selectedMovie, user, register } = this.state;
+    if (register === false) return <RegistrationView onClick={()
 
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
-    if (!user && !newUser);
+    if (!user && !register);
     return (
       <RegistrationView
         onClick={() => this.alreadyMember()}

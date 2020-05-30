@@ -45751,7 +45751,11 @@ function LoginView(props) {
     variant: "btn-lg btn-secondary btn-block",
     type: "submit",
     onClick: handleSubmit
-  }, "Submit"));
+  }, "Login"), _react.default.createElement(_reactBootstrap.Button, {
+    variant: "btn-lg btn-secondary btn-block",
+    type: "submit",
+    onClick: handleSubmit
+  }, "New User"));
 }
 },{"react":"../node_modules/react/index.js","react-bootstrap":"../node_modules/react-bootstrap/esm/index.js","./login-view.scss":"components/login-view/login-view.scss","prop-types":"../node_modules/prop-types/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -49171,7 +49175,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       movies: null,
       selectedMovie: null,
       user: null,
-      newUser: false
+      register: null
     };
     return _this;
   } // One of the "hooks" available in a React Component
@@ -49208,6 +49212,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     key: "onLoggedIn",
     value: function onLoggedIn(user) {
       this.setState({
+        //console.log(user);
         user: user
       });
     }
@@ -49222,13 +49227,13 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          newUser = _this$state.newUser;
+          register = _this$state.register;
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }
       });
-      if (!user && !newUser) ;
+      if (!user && !register) ;
       return _react.default.createElement(_registrationView.RegistrationView, {
         onClick: function onClick() {
           return _this3.alreadyMember();
@@ -49358,7 +49363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65336" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53314" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
