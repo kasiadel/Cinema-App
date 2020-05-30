@@ -5,7 +5,7 @@ import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieView } from "../movie-view/movie-view";
 import { MovieCard } from "../movie-card/movie-card";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -65,7 +65,7 @@ export class MainView extends React.Component {
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
-    if (newUser);
+    if (!user && !newUser);
     return (
       <RegistrationView
         onClick={() => this.alreadyMember()}
