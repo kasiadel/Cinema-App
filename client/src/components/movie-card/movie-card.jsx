@@ -20,32 +20,9 @@ export class MovieCard extends React.Component {
           </Button>
         </Card.Body>
       </Card>
-
-      // <Card className="mb-3 mb-sm-4" style={{ minWidth: "12rem" }}>
-      //   <Card.Img variant="top" src={movie.ImageUrl} />
-      //   <Card.Body>
-      //     <Card.Title>{movie.Title}</Card.Title>
-      //     <Card.Subtitle className="mb-2 text-muted">
-      //       {movie.Genre.Name}
-      //     </Card.Subtitle>
-      //     <Card.Text>{movieDescription}</Card.Text>
-      //     <Button
-      //       className="outline-primary"
-      //       onClick={() => onClick(movie)}
-      //       variant="link"
-      //     >
-      //       Open
-      //     </Button>
-      //   </Card.Body>
-      // </Card>
     );
   }
 }
-// {
-//   <div onClick={() => onClick(movie)} className="movie-card">
-//     {movie.Title}
-//   </div>;
-// }
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({

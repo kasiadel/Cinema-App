@@ -14,15 +14,23 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
 
+export const MODES = {
+  LOGIN: "login",
+  MOVIES: "movies",
+  REGISTER: "register",
+  MOVIE: "movie",
+};
+
 export class MainView extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      mode: MODES.LOGIN,
       movies: null,
       selectedMovie: null,
       user: null,
-      register: null,
+      //register: null,
     };
   }
 
@@ -52,35 +60,85 @@ export class MainView extends React.Component {
     });
   }
 
+  // nullifyRegister = () => {
+  //   alert("hello from nullifyReg");
+  // };
+  //this.setState({ register: null });
+  // };
+
   onLoggedIn(user) {
     this.setState({
       //console.log(user);
       user,
+      mode: MODES.MOVIES,
     });
   }
+
+  // onRegister({ username, password }) {
+  //   this.setState({
+  //     user: { username, password },
+  //   });
+  // }
+
+  setRegisterMode = () => {
+    this.setState({
+      mode: MODES.REGISTER,
+    });
+  };
+
   render() {
     //   // If the state isn't initialized, this will throw on runtime
     //   // before the data is initially loaded
-    const { movies, selectedMovie, user, register } = this.state;
-    if (register === false) return <RegistrationView onClick={()
+    const { movies, selectedMovie, user, register, mode } = this.state;
 
-    if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+    // if (!user)
+    //   return (
+    //     <LoginView
+    //       onLoggedIn={(user) => this.onLoggedIn(user)}
+    //       onRegisterRedirect={this.setRegisterMode}
+    //     />
+    //   );
 
-    if (!user && !register);
-    return (
-      <RegistrationView
-        onClick={() => this.alreadyMember()}
-        onSignedIn={(user) => this.onSignedIn(user)}
-      />
-    );
+    if (mode === MODES.LOGIN) {
+      return (
+        <div>
+          <div>{this.state.mode}</div>
+          <LoginView
+            onLoggedIn={(user) => this.onLoggedIn(user)}
+            onRegisterRedirect={this.setRegisterMode}
+          />
+        </div>
+      );
+    }
+
+    if (mode === MODES.REGISTER) {
+      return (
+        <RegistrationView
+          onClick={() => {
+            console.log("onclick zawolane");
+          }}
+          onSignedIn={() => console.log("onsignedin zawolane")}
+        />
+      );
+    }
+
+    // if (register === false)
+    // //   return <RegistrationView onClick={() />;
+
+    // if (!user && !register);
+    // return (
+    //   <RegistrationView
+    //     onClick={() => this.alreadyMember()}
+    //     onSignedIn={(user) => this.onSignedIn(user)}
+    //   />
+    // );
 
     return (
       <React.Fragment>
         <Navbar bg="light" expand="lg">
           <Navbar.Brand>Cinema-App</Navbar.Brand>
-          <Nav.Link href="login-view">Login</Nav.Link>
-          <Nav.Link href="registration-view">Register</Nav.Link>
+          {/* <Nav.Link href="login-view">Login</Nav.Link>
+          <Nav.Link href="registration-view">Register</Nav.Link> */}
         </Navbar>
         {selectedMovie ? (
           <MovieView movie={selectedMovie} />
