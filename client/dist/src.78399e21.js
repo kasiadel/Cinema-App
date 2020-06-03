@@ -49223,25 +49223,25 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     // };
     //this.setState({ register: null });
     // };
-    // onLoggedIn(user) {
-    //   this.setState({
-    //     //console.log(user);
-    //     user,
-    //     // mode: MODES.MOVIES,
-    //   });
-    // }
 
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      console.log(authData);
+    value: function onLoggedIn(user) {
       this.setState({
-        user: authData.user.Username
+        //console.log(user);
+        user: user // mode: MODES.MOVIES,
+
       });
-      localStorage.setItem("token", authData.token);
-      localStorage.setItem("user", authData.user.Username);
-      this.getMovies(authData.token);
-    } // onRegister({ username, password }) {
+    } // onLoggedIn(authData) {
+    //   console.log(authData);
+    //   this.setState({
+    //     user: authData.user.Username,
+    //   });
+    //   localStorage.setItem("token", authData.token);
+    //   localStorage.setItem("user", authData.user.Username);
+    //   this.getMovies(authData.token);
+    // }
+    // onRegister({ username, password }) {
     //   this.setState({
     //     user: { username, password },
     //   });
@@ -49413,7 +49413,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57760" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -29,9 +29,11 @@ var auth = require("./auth")(app);
 
 var allowedOrigins = [
   "http://localhost:8080",
-  // "http://localhost:1234",
+  "http://localhost:1234",
   "https://tranquil-river-08432.herokuapp.com",
-];
+
+
+
 
 app.use(
   cors({
