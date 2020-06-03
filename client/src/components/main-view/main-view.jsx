@@ -70,7 +70,7 @@ export class MainView extends React.Component {
     this.setState({
       //console.log(user);
       user,
-      // mode: MODES.MOVIES,
+      //mode: MODES.MOVIES,
     });
   }
 

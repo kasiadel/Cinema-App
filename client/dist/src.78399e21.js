@@ -32572,7 +32572,14 @@ function LoginView(props) {
   var _useState3 = (0, _react.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
-      setPassword = _useState4[1];
+      setPassword = _useState4[1]; // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(username, password);
+  //   /* Send a request to the server for authentication */
+  //   /* then call props.onLoggedIn(username) */
+  //   props.onLoggedIn(username);
+  // };
+
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
@@ -49229,7 +49236,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function onLoggedIn(user) {
       this.setState({
         //console.log(user);
-        user: user // mode: MODES.MOVIES,
+        user: user //mode: MODES.MOVIES,
 
       });
     } // onLoggedIn(authData) {
@@ -49413,7 +49420,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52218" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
