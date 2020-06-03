@@ -32543,6 +32543,8 @@ require("./login-view.scss");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -32572,11 +32574,19 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var handleSubmit = function handleSubmit() {
-    // e.preventDefault();
-    // console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    /* Send a request to the server for authentication */
+
+    _axios.default.post("https://tranquil-river-08432.herokuapp.com/login", {
+      Username: username,
+      Password: password
+    }).then(function (response) {
+      var data = response.data;
+      props.onLoggedIn(data);
+    }).catch(function (e) {
+      console.log("no such user");
+    });
   };
 
   var handleRegisterRedirect = function handleRegisterRedirect() {
@@ -32614,7 +32624,7 @@ function LoginView(props) {
     onClick: handleRegisterRedirect
   }, "New User"));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss","prop-types":"../node_modules/prop-types/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -49213,15 +49223,24 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     // };
     //this.setState({ register: null });
     // };
+    // onLoggedIn(user) {
+    //   this.setState({
+    //     //console.log(user);
+    //     user,
+    //     // mode: MODES.MOVIES,
+    //   });
+    // }
 
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        //console.log(user);
-        user: user,
-        mode: MODES.MOVIES
+        user: authData.user.Username
       });
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", authData.user.Username);
+      this.getMovies(authData.token);
     } // onRegister({ username, password }) {
     //   this.setState({
     //     user: { username, password },
@@ -49394,7 +49413,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62247" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57760" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -66,14 +66,24 @@ export class MainView extends React.Component {
   //this.setState({ register: null });
   // };
 
-  onLoggedIn(user) {
-    this.setState({
-      //console.log(user);
-      user,
-      mode: MODES.MOVIES,
-    });
-  }
+  // onLoggedIn(user) {
+  //   this.setState({
+  //     //console.log(user);
+  //     user,
+  //     // mode: MODES.MOVIES,
+  //   });
+  // }
 
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username,
+    });
+
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
+    this.getMovies(authData.token);
+  }
   // onRegister({ username, password }) {
   //   this.setState({
   //     user: { username, password },
