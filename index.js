@@ -2,7 +2,7 @@ var express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-const cors = require("cors");
+
 const Models = require("./models.js");
 const passport = require("passport");
 require("./passport");
@@ -10,6 +10,12 @@ const Movies = Models.Movie;
 const Users = Models.User;
 uuid = require("uuid");
 app.use(bodyParser.json());
+
+const cors = require("cors");
+let allowedOrigins = [
+  `http://localhost:${port}`,
+  ...process.env.ALLOWED_ORIGINS.split(" "),
+];
 
 const { check, validationResult } = require("express-validator");
 // mongoose.connect("mongodb://localhost:27017/Cinema-App", {
@@ -27,11 +33,11 @@ mongoose.connect(
 
 var auth = require("./auth")(app);
 
-var allowedOrigins = [
-  "http://localhost:8080",
-  "http://localhost:1234",
-  "https://tranquil-river-08432.herokuapp.com",
-];
+// var allowedOrigins = [
+//   "http://localhost:8080",
+//   "http://localhost:1234",
+//   "https://tranquil-river-08432.herokuapp.com",
+// ];
 
 app.use(
   cors({

@@ -32585,7 +32585,7 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post("https://tranquil-river-08432.herokuapp.com/login", {
+    _axios.default.post("http://localhost:1234//login", {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -49230,34 +49230,47 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     // };
     //this.setState({ register: null });
     // };
+    // onLoggedIn(user) {
+    //   this.setState({
+    //     //console.log(user);
+    //     user,
+    //     mode: MODES.MOVIES,
+    //   });
+    // }
 
   }, {
-    key: "onLoggedIn",
-    value: function onLoggedIn(user) {
-      this.setState({
-        //console.log(user);
-        user: user //mode: MODES.MOVIES,
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
 
+      _axios.default.get("YOUR_API_URL/movies", {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        // Assign the result to the state
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
-    } // onLoggedIn(authData) {
-    //   console.log(authData);
-    //   this.setState({
-    //     user: authData.user.Username,
-    //   });
-    //   localStorage.setItem("token", authData.token);
-    //   localStorage.setItem("user", authData.user.Username);
-    //   this.getMovies(authData.token);
-    // }
-    // onRegister({ username, password }) {
-    //   this.setState({
-    //     user: { username, password },
-    //   });
-    // }
-
+    }
+  }, {
+    key: "onLoggedIn",
+    value: function onLoggedIn(authData) {
+      console.log(authData);
+      this.setState({
+        user: authData.user.Username
+      });
+      localStorage.setItem("token", authData.token);
+      localStorage.setItem("user", authData.user.Username);
+      this.getMovies(authData.token);
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       //   // If the state isn't initialized, this will throw on runtime
       //   // before the data is initially loaded
@@ -49277,7 +49290,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (mode === MODES.LOGIN) {
         return _react.default.createElement("div", null, _react.default.createElement("div", null, this.state.mode), _react.default.createElement(_loginView.LoginView, {
           onLoggedIn: function onLoggedIn(user) {
-            return _this3.onLoggedIn(user);
+            return _this4.onLoggedIn(user);
           },
           onRegisterRedirect: this.setRegisterMode
         }));
@@ -49315,7 +49328,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         });
       })));
@@ -49420,7 +49433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49258" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53891" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

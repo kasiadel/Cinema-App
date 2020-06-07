@@ -66,30 +66,38 @@ export class MainView extends React.Component {
   //this.setState({ register: null });
   // };
 
-  onLoggedIn(user) {
-    this.setState({
-      //console.log(user);
-      user,
-      //mode: MODES.MOVIES,
-    });
+  // onLoggedIn(user) {
+  //   this.setState({
+  //     //console.log(user);
+  //     user,
+  //     mode: MODES.MOVIES,
+  //   });
+  // }
+  getMovies(token) {
+    axios
+      .get("YOUR_API_URL/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
+  onLoggedIn(authData) {
+    console.log(authData);
+    this.setState({
+      user: authData.user.Username,
+    });
 
-  // onLoggedIn(authData) {
-  //   console.log(authData);
-  //   this.setState({
-  //     user: authData.user.Username,
-  //   });
-
-  //   localStorage.setItem("token", authData.token);
-  //   localStorage.setItem("user", authData.user.Username);
-  //   this.getMovies(authData.token);
-  // }
-  // onRegister({ username, password }) {
-  //   this.setState({
-  //     user: { username, password },
-  //   });
-  // }
-
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
+    this.getMovies(authData.token);
+  }
   setRegisterMode = () => {
     this.setState({
       mode: MODES.REGISTER,
