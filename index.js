@@ -12,10 +12,6 @@ uuid = require("uuid");
 app.use(bodyParser.json());
 
 const cors = require("cors");
-let allowedOrigins = [
-  `http://localhost:${port}`,
-  ...process.env.ALLOWED_ORIGINS.split(" "),
-];
 
 const { check, validationResult } = require("express-validator");
 // mongoose.connect("mongodb://localhost:27017/Cinema-App", {
@@ -33,11 +29,11 @@ mongoose.connect(
 
 var auth = require("./auth")(app);
 
-// var allowedOrigins = [
-//   "http://localhost:8080",
-//   "http://localhost:1234",
-//   "https://tranquil-river-08432.herokuapp.com",
-// ];
+var allowedOrigins = [
+  "http://localhost:8080",
+  "http://localhost:1234",
+  "https://tranquil-river-08432.herokuapp.com",
+];
 
 app.use(
   cors({
@@ -197,7 +193,7 @@ app.delete(
 
 // Get all movies
 app.get("/movies", function (req, res) {
-  passport.authenticate("jwt", { session: false });
+  // passport.authenticate("jwt", { session: false });
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies);

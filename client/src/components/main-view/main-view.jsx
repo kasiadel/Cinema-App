@@ -35,19 +35,19 @@ export class MainView extends React.Component {
   }
 
   // One of the "hooks" available in a React Component
-  // componentDidMount() {
-  //   axios
-  //     .get("https://tranquil-river-08432.herokuapp.com/movies/")
-  //     .then((response) => {
-  //       // Assign the result to the state
-  //       this.setState({
-  //         movies: response.data,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       // console.log(error);
-  //     });
-  // }
+  componentDidMount() {
+    axios
+      .get("https://tranquil-river-08432.herokuapp.com/movies/")
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        // console.log(error);
+      });
+  }
 
   resetSelectedMovie() {
     this.setState({
@@ -66,38 +66,14 @@ export class MainView extends React.Component {
   //this.setState({ register: null });
   // };
 
-  // onLoggedIn(user) {
-  //   this.setState({
-  //     //console.log(user);
-  //     user,
-  //     mode: MODES.MOVIES,
-  //   });
-  // }
-  getMovies(token) {
-    axios
-      .get("https://tranquil-river-08432.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-  onLoggedIn(authData) {
-    console.log(authData);
+  onLoggedIn(user) {
     this.setState({
-      user: authData.user.Username,
+      //console.log(user);
+      user,
+      mode: MODES.MOVIES,
     });
-
-    localStorage.setItem("token", authData.token);
-    localStorage.setItem("user", authData.user.Username);
-    this.getMovies(authData.token);
   }
+
   setRegisterMode = () => {
     this.setState({
       mode: MODES.REGISTER,

@@ -32572,28 +32572,16 @@ function LoginView(props) {
   var _useState3 = (0, _react.useState)(""),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
-      setPassword = _useState4[1]; // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(username, password);
-  //   /* Send a request to the server for authentication */
-  //   /* then call props.onLoggedIn(username) */
-  //   props.onLoggedIn(username);
-  // };
-
+      setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
+    console.log(username, password);
     /* Send a request to the server for authentication */
 
-    _axios.default.post("https://tranquil-river-08432.herokuapp.com/login", {
-      Username: username,
-      Password: password
-    }).then(function (response) {
-      var data = response.data;
-      props.onLoggedIn(data);
-    }).catch(function (e) {
-      console.log("no such user");
-    });
+    /* then call props.onLoggedIn(username) */
+
+    props.onLoggedIn(username);
   };
 
   var handleRegisterRedirect = function handleRegisterRedirect() {
@@ -49197,22 +49185,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     };
     return _this;
   } // One of the "hooks" available in a React Component
-  // componentDidMount() {
-  //   axios
-  //     .get("https://tranquil-river-08432.herokuapp.com/movies/")
-  //     .then((response) => {
-  //       // Assign the result to the state
-  //       this.setState({
-  //         movies: response.data,
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       // console.log(error);
-  //     });
-  // }
 
 
   _createClass(MainView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies/").then(function (response) {
+        // Assign the result to the state
+        _this2.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {// console.log(error);
+      });
+    }
+  }, {
     key: "resetSelectedMovie",
     value: function resetSelectedMovie() {
       this.setState({
@@ -49230,42 +49218,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     // };
     //this.setState({ register: null });
     // };
-    // onLoggedIn(user) {
-    //   this.setState({
-    //     //console.log(user);
-    //     user,
-    //     mode: MODES.MOVIES,
-    //   });
-    // }
 
-  }, {
-    key: "getMovies",
-    value: function getMovies(token) {
-      var _this2 = this;
-
-      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies", {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
-        // Assign the result to the state
-        _this2.setState({
-          movies: response.data
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      console.log(authData);
+    value: function onLoggedIn(user) {
       this.setState({
-        user: authData.user.Username
+        //console.log(user);
+        user: user,
+        mode: MODES.MOVIES
       });
-      localStorage.setItem("token", authData.token);
-      localStorage.setItem("user", authData.user.Username);
-      this.getMovies(authData.token);
     }
   }, {
     key: "render",
@@ -49433,7 +49394,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55011" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56137" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
