@@ -2,7 +2,7 @@ var express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-
+const cors = require("cors");
 const Models = require("./models.js");
 const passport = require("passport");
 require("./passport");
@@ -10,8 +10,6 @@ const Movies = Models.Movie;
 const Users = Models.User;
 uuid = require("uuid");
 app.use(bodyParser.json());
-
-const cors = require("cors");
 
 const { check, validationResult } = require("express-validator");
 // mongoose.connect("mongodb://localhost:27017/Cinema-App", {
@@ -23,17 +21,13 @@ mongoose.connect(
   "mongodb+srv://myCinemaAppadmin:irysek@cluster0-kpfkc.mongodb.net/Cinema-App?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useUnifiedTopology: true
   }
 );
 
 var auth = require("./auth")(app);
 
-var allowedOrigins = [
-  "http://localhost:8080",
-  "http://localhost:1234",
-  "https://tranquil-river-08432.herokuapp.com",
-];
+var allowedOrigins = ["http://localhost:8080", "http://localhost:1234"];
 
 app.use(
   cors({
@@ -193,7 +187,6 @@ app.delete(
 
 // Get all movies
 app.get("/movies", function (req, res) {
-  // passport.authenticate("jwt", { session: false });
   Movies.find()
     .then(function (movies) {
       res.status(201).json(movies);

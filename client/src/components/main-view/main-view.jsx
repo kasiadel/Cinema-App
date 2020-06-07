@@ -74,6 +74,12 @@ export class MainView extends React.Component {
     });
   }
 
+  // onRegister({ username, password }) {
+  //   this.setState({
+  //     user: { username, password },
+  //   });
+  // }
+
   setRegisterMode = () => {
     this.setState({
       mode: MODES.REGISTER,

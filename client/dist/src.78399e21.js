@@ -32543,8 +32543,6 @@ require("./login-view.scss");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _axios = _interopRequireDefault(require("axios"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -32574,13 +32572,10 @@ function LoginView(props) {
       password = _useState4[0],
       setPassword = _useState4[1];
 
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    console.log(username, password);
-    /* Send a request to the server for authentication */
-
-    /* then call props.onLoggedIn(username) */
-
+  var handleSubmit = function handleSubmit() {
+    // e.preventDefault();
+    // console.log(username, password);
+    // Send a request to the server for authentication then call props.onLoggedIn(username)
     props.onLoggedIn(username);
   };
 
@@ -32619,7 +32614,7 @@ function LoginView(props) {
     onClick: handleRegisterRedirect
   }, "New User"));
 }
-},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss","prop-types":"../node_modules/prop-types/index.js","axios":"../node_modules/axios/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","./login-view.scss":"components/login-view/login-view.scss","prop-types":"../node_modules/prop-types/index.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -49227,7 +49222,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         user: user,
         mode: MODES.MOVIES
       });
-    }
+    } // onRegister({ username, password }) {
+    //   this.setState({
+    //     user: { username, password },
+    //   });
+    // }
+
   }, {
     key: "render",
     value: function render() {
@@ -49394,7 +49394,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56137" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57114" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
