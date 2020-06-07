@@ -35,19 +35,19 @@ export class MainView extends React.Component {
   }
 
   // One of the "hooks" available in a React Component
-  componentDidMount() {
-    axios
-      .get("https://tranquil-river-08432.herokuapp.com/movies/")
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        // console.log(error);
-      });
-  }
+  // componentDidMount() {
+  //   axios
+  //     .get("https://tranquil-river-08432.herokuapp.com/movies/")
+  //     .then((response) => {
+  //       // Assign the result to the state
+  //       this.setState({
+  //         movies: response.data,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //     });
+  // }
 
   resetSelectedMovie() {
     this.setState({
@@ -75,7 +75,7 @@ export class MainView extends React.Component {
   // }
   getMovies(token) {
     axios
-      .get("YOUR_API_URL/movies", {
+      .get("https://tranquil-river-08432.herokuapp.com/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

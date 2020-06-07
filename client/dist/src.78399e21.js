@@ -32585,7 +32585,7 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post("http://localhost:1234//login", {
+    _axios.default.post("https://tranquil-river-08432.herokuapp.com/login", {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -49197,22 +49197,22 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     };
     return _this;
   } // One of the "hooks" available in a React Component
+  // componentDidMount() {
+  //   axios
+  //     .get("https://tranquil-river-08432.herokuapp.com/movies/")
+  //     .then((response) => {
+  //       // Assign the result to the state
+  //       this.setState({
+  //         movies: response.data,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //     });
+  // }
 
 
   _createClass(MainView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies/").then(function (response) {
-        // Assign the result to the state
-        _this2.setState({
-          movies: response.data
-        });
-      }).catch(function (error) {// console.log(error);
-      });
-    }
-  }, {
     key: "resetSelectedMovie",
     value: function resetSelectedMovie() {
       this.setState({
@@ -49241,15 +49241,15 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getMovies",
     value: function getMovies(token) {
-      var _this3 = this;
+      var _this2 = this;
 
-      _axios.default.get("YOUR_API_URL/movies", {
+      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
         // Assign the result to the state
-        _this3.setState({
+        _this2.setState({
           movies: response.data
         });
       }).catch(function (error) {
@@ -49270,7 +49270,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       //   // If the state isn't initialized, this will throw on runtime
       //   // before the data is initially loaded
@@ -49290,7 +49290,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       if (mode === MODES.LOGIN) {
         return _react.default.createElement("div", null, _react.default.createElement("div", null, this.state.mode), _react.default.createElement(_loginView.LoginView, {
           onLoggedIn: function onLoggedIn(user) {
-            return _this4.onLoggedIn(user);
+            return _this3.onLoggedIn(user);
           },
           onRegisterRedirect: this.setRegisterMode
         }));
@@ -49328,7 +49328,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this4.onMovieClick(movie);
+            return _this3.onMovieClick(movie);
           }
         });
       })));
@@ -49433,7 +49433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53891" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55011" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
