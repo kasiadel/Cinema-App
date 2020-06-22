@@ -3,3 +3,8 @@ $color: steelblue;
 .my-flix {
   color: $color;
 }
+@media (min-width: 576px) {
+  .card-deck .card {
+    flex-basis: 20%;
+  }
+}

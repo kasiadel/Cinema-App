@@ -5,32 +5,27 @@ import { LoginView } from "../login-view/login-view";
 import { RegistrationView } from "../registration-view/registration-view";
 import { MovieView } from "../movie-view/movie-view";
 import { MovieCard } from "../movie-card/movie-card";
-// import { Link } from "react-router-dom";
 
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import Nav from "react-bootstrap/Nav";
-
-export const MODES = {
-  LOGIN: "login",
-  MOVIES: "movies",
-  REGISTER: "register",
-  MOVIE: "movie",
-};
+import {
+  Navbar,
+  Row,
+  Container,
+  Button,
+  Form,
+  Nav,
+  Col,
+  FormControl,
+} from "react-bootstrap";
 
 export class MainView extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      mode: MODES.LOGIN,
       movies: null,
       selectedMovie: null,
       user: null,
-      //register: null,
+      view: "login",
     };
   }
 
@@ -60,86 +55,75 @@ export class MainView extends React.Component {
     });
   }
 
-  // nullifyRegister = () => {
-  //   alert("hello from nullifyReg");
-  // };
-  //this.setState({ register: null });
-  // };
-
   onLoggedIn(user) {
+    const view = "movies";
     this.setState({
       //console.log(user);
       user,
-      mode: MODES.MOVIES,
+      view,
     });
   }
 
-  // onRegister({ username, password }) {
-  //   this.setState({
-  //     user: { username, password },
-  //   });
-  // }
-
-  setRegisterMode = () => {
+  setViewState(view) {
+    // view could be one of ['login', 'register', 'movies']
     this.setState({
-      mode: MODES.REGISTER,
+      view,
     });
-  };
-
+  }
   render() {
     //   // If the state isn't initialized, this will throw on runtime
     //   // before the data is initially loaded
-    const { movies, selectedMovie, user, register, mode } = this.state;
+    const { movies, selectedMovie, user, view } = this.state;
 
-    // if (!user)
-    //   return (
-    //     <LoginView
-    //       onLoggedIn={(user) => this.onLoggedIn(user)}
-    //       onRegisterRedirect={this.setRegisterMode}
-    //     />
-    //   );
+    const MenuBar = (
+      <Navbar bg="light">
+        <Button
+          variant="primary"
+          size="sm ml-2 mr-2"
+          onClick={() => this.setViewState("login")}
+        >
+          Login
+        </Button>
+        <Button
+          variant="primary"
+          size="sm"
+          onClick={() => this.setViewState("register")}
+        >
+          Register
+        </Button>
+      </Navbar>
+    );
 
-    if (mode === MODES.LOGIN) {
+    if (view === "login") {
       return (
-        <div>
-          <div>{this.state.mode}</div>
-          <LoginView
-            onLoggedIn={(user) => this.onLoggedIn(user)}
-            onRegisterRedirect={this.setRegisterMode}
+        <React.Fragment>
+          {MenuBar}
+          <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
+        </React.Fragment>
+      );
+    } else if (view === "register") {
+      return (
+        <React.Fragment>
+          {MenuBar}
+
+          <RegistrationView
+            onRegisterSuccess={() => this.setViewState("login")}
           />
-        </div>
+        </React.Fragment>
       );
     }
-
-    if (mode === MODES.REGISTER) {
-      return (
-        <RegistrationView
-          onClick={() => {
-            console.log("onclick zawolane");
-          }}
-          onSignedIn={() => console.log("onsignedin zawolane")}
-        />
-      );
-    }
-
-    // if (register === false)
-    // //   return <RegistrationView onClick={() />;
-
-    // if (!user && !register);
-    // return (
-    //   <RegistrationView
-    //     onClick={() => this.alreadyMember()}
-    //     onSignedIn={(user) => this.onSignedIn(user)}
-    //   />
-    // );
-
+    // Login view is fine, now we care about the registration view
+    // Or we only need one props, incase register fine, if not, we handle it there
+    // We pass two props to the RegistrationView, corresponding to the 2 cases
+    // The alreadyMember and onSignedIn we don't use yet
+    // Then view is always login, as we don't change it, we need to change it to another view when user clicks on sth
+    // Before the movies have been loaded
+    if (!movies) return <div className="main-view" />;
     return (
       <React.Fragment>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand>Cinema-App</Navbar.Brand>
-          {/* <Nav.Link href="login-view">Login</Nav.Link>
-          <Nav.Link href="registration-view">Register</Nav.Link> */}
-        </Navbar>
+        {}
+        {MenuBar}
+
         {selectedMovie ? (
           <MovieView movie={selectedMovie} />
         ) : (

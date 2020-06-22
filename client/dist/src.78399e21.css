@@ -9,4 +9,10 @@
   color: steelblue;
 }
 
+@media (min-width: 576px) {
+  .card-deck .card {
+    flex-basis: 20%;
+  }
+}
+
 /*# sourceMappingURL=/src.78399e21.css.map */
