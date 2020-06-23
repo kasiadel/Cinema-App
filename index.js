@@ -27,7 +27,7 @@ mongoose.connect(
   "mongodb+srv://myCinemaAppadmin:irysek@cluster0-kpfkc.mongodb.net/Cinema-App?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    // useUnifiedTopology: true
+    //useUnifiedTopology: true,
   }
 );
 
@@ -153,20 +153,19 @@ app.post(
   }
 );
 //get all movies
-app.get(
-  "/movies",
-  //passport.authenticate('jwt', { session: false })//
-  function (req, res) {
-    Movies.find()
-      .then(function (movies) {
-        res.status(201).json(movies);
-      })
-      .catch(function (err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+app.get("/movies", passport.authenticate("jwt", { session: false }), function (
+  req,
+  res
+) {
+  Movies.find()
+    .then(function (movies) {
+      res.status(201).json(movies);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 //get movie by title
 app.get(
