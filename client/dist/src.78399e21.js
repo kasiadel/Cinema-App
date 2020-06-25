@@ -49157,22 +49157,34 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       view: "login"
     };
     return _this;
-  } // One of the "hooks" available in a React Component
+  } // // One of the "hooks" available in a React Component
+  // componentDidMount() {
+  //   axios
+  //     .get("https://tranquil-river-08432.herokuapp.com/movies")
+  //     // .get("https://localhost:8080")
+  //     .then((response) => {
+  //       // Assign the result to the state
+  //       this.setState({
+  //         movies: response.data,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //     });
+  // }
 
 
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
+      var accessToken = localStorage.getItem("token");
 
-      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies") // .get("https://localhost:8080")
-      .then(function (response) {
-        // Assign the result to the state
-        _this2.setState({
-          movies: response.data
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem("user")
         });
-      }).catch(function (error) {// console.log(error);
-      });
+        this.getMovies(accessToken);
+      }
     }
   }, {
     key: "resetSelectedMovie",
@@ -49210,7 +49222,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getMovies",
     value: function getMovies(token) {
-      var _this3 = this;
+      var _this2 = this;
 
       _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies", {
         // .get("https://localhost:8080", {
@@ -49219,8 +49231,9 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         // Assign the result to the state
-        _this3.setState({
-          movies: response.data
+        _this2.setState({
+          movies: response.data,
+          view: "movies"
         });
       }).catch(function (error) {
         console.log(error);
@@ -49237,7 +49250,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       //   // If the state isn't initialized, this will throw on runtime
       //   // before the data is initially loaded
@@ -49253,26 +49266,26 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         variant: "primary",
         size: "sm ml-2 mr-2",
         onClick: function onClick() {
-          return _this4.setViewState("login");
+          return _this3.setViewState("login");
         }
       }, "Login"), _react.default.createElement(_reactBootstrap.Button, {
         variant: "primary",
         size: "sm",
         onClick: function onClick() {
-          return _this4.setViewState("register");
+          return _this3.setViewState("register");
         }
       }, "Register"));
 
       if (view === "login") {
         return _react.default.createElement(_react.default.Fragment, null, MenuBar, _react.default.createElement(_loginView.LoginView, {
           onLoggedIn: function onLoggedIn(user) {
-            return _this4.onLoggedIn(user);
+            return _this3.onLoggedIn(user);
           }
         }));
       } else if (view === "register") {
         return _react.default.createElement(_react.default.Fragment, null, MenuBar, _react.default.createElement(_registrationView.RegistrationView, {
           onRegisterSuccess: function onRegisterSuccess() {
-            return _this4.setViewState("login");
+            return _this3.setViewState("login");
           }
         }));
       } // Login view is fine, now we care about the registration view
@@ -49295,7 +49308,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           key: movie._id,
           movie: movie,
           onClick: function onClick(movie) {
-            return _this4.onMovieClick(movie);
+            return _this3.onMovieClick(movie);
           }
         });
       })));

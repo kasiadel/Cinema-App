@@ -29,20 +29,30 @@ export class MainView extends React.Component {
     };
   }
 
-  // One of the "hooks" available in a React Component
+  // // One of the "hooks" available in a React Component
+  // componentDidMount() {
+  //   axios
+  //     .get("https://tranquil-river-08432.herokuapp.com/movies")
+  //     // .get("https://localhost:8080")
+  //     .then((response) => {
+  //       // Assign the result to the state
+  //       this.setState({
+  //         movies: response.data,
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       // console.log(error);
+  //     });
+  // }
+
   componentDidMount() {
-    axios
-      .get("https://tranquil-river-08432.herokuapp.com/movies")
-      // .get("https://localhost:8080")
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        // console.log(error);
+    let accessToken = localStorage.getItem("token");
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem("user"),
       });
+      this.getMovies(accessToken);
+    }
   }
 
   resetSelectedMovie() {
@@ -86,6 +96,7 @@ export class MainView extends React.Component {
         // Assign the result to the state
         this.setState({
           movies: response.data,
+          view: "movies",
         });
       })
       .catch(function (error) {
