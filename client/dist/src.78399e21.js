@@ -45733,6 +45733,7 @@ function LoginView(props) {
     /* Send a request to the server for authentication */
 
     _axios.default.post("https://tranquil-river-08432.herokuapp.com/login", {
+      //.post("https://localhost:8080/login", {
       Username: username,
       Password: password
     }).then(function (response) {
@@ -49164,7 +49165,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies").then(function (response) {
+      _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies") // .get("https://localhost:8080")
+      .then(function (response) {
         // Assign the result to the state
         _this2.setState({
           movies: response.data
@@ -49211,6 +49213,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       _axios.default.get("https://tranquil-river-08432.herokuapp.com/movies", {
+        // .get("https://localhost:8080", {
         headers: {
           Authorization: "Bearer ".concat(token)
         }
@@ -49397,7 +49400,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57824" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56604" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

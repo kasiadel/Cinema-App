@@ -20,6 +20,7 @@ export function LoginView(props) {
     /* Send a request to the server for authentication */
     axios
       .post("https://tranquil-river-08432.herokuapp.com/login", {
+        //.post("https://localhost:8080/login", {
         Username: username,
         Password: password,
       })

@@ -27,7 +27,7 @@ mongoose.connect(
   "mongodb+srv://myCinemaAppadmin:irysek@cluster0-kpfkc.mongodb.net/Cinema-App?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
-    //useUnifiedTopology: true,
+    useUnifiedTopology: true,
   }
 );
 
